@@ -19,7 +19,7 @@ public class Button extends AbstractComponent {
     }
 
     private String renderOpeningTag() {
-        return "<button type=\"button\" style=\"" + getDisplayCssProperty() + "\">";
+        return "<button type=\"button\" " + getStyleWithDisplay() + ">";
     }
 
     public String getText() {
@@ -27,31 +27,6 @@ public class Button extends AbstractComponent {
     }
 
     public void setText(String text) {
-        this.text = text;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Button button = (Button) o;
-        return text.equals(button.text);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(text);
-    }
-
-    @Override
-    public String toString() {
-        return "Button{" +
-                "text='" + text + '\'' +
-                "hidden'" + isHidden() + '\'' +
-                '}';
+        this.text = Objects.requireNonNull(text, "text");
     }
 }

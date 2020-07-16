@@ -15,4 +15,8 @@ public abstract class AbstractComponent implements Component {
     protected String getDisplayCssProperty() {
         return hidden ? "display: none;" : "";
     }
+
+    protected String getStyleWithDisplay() {
+        return hidden ? "style=\"" + getDisplayCssProperty() + "\"" : "";
+    }
 }
