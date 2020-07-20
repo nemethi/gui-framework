@@ -13,7 +13,7 @@ public abstract class Container extends AbstractComponent {
     private static final String DATA_OPENING = "<td>";
     private static final String DATA_CLOSING = "</td>";
 
-    private final List<List<Component>> components = new ArrayList<>();
+    protected List<List<Component>> components = new ArrayList<>();
     private Component lastAdded = null;
 
     protected abstract String renderOwnOpeningTag();
