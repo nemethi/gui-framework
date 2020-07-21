@@ -34,9 +34,7 @@ public class ComboBox extends AbstractComponent {
      */
     @Override
     public String render() {
-        return "<select " + getStyleWithDisplay() + ">" +
-                renderItems() +
-                "</select>";
+        return "<select " + getStyleWithDisplay() + ">" + renderItems() + "</select>";
     }
 
     private String renderItems() {

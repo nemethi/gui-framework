@@ -37,11 +37,8 @@ public class TextBox extends AbstractComponent {
      */
     @Override
     public String render() {
-        return "<input " +
-                "type=\"text\" " +
-                renderPlaceholder() +
-                "size=\"" + size + "\" " +
-                getStyleWithDisplay() + "/>";
+        return "<input " + "type=\"text\" " + renderPlaceholder() +
+                "size=\"" + size + "\" " + getStyleWithDisplay() + "/>";
     }
 
     private String renderPlaceholder() {

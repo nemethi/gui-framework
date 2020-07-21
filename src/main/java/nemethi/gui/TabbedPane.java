@@ -37,24 +37,19 @@ public class TabbedPane extends AbstractComponent {
      */
     @Override
     public String render() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<div ")
-                .append(getStyleWithDisplay())
-                .append(">")
-                .append(renderTablinks());
-        for (Tab tab : tabs) {
-            builder.append(tab.render());
-        }
-        builder.append("<script>")
-                .append(SHOW_TAB_JAVASCRIPT)
-                .append("</script>")
-                .append(DIV_CLOSING);
-        return builder.toString();
+        return "<div " + getStyleWithDisplay() + ">" +
+                renderTablinksDiv() +
+                renderTabs() +
+                renderJavaScript() +
+                DIV_CLOSING;
+    }
+
+    private String renderTablinksDiv() {
+        return "<div " + TABLINK_DIV_STYLE + ">" + renderTablinks() + DIV_CLOSING;
     }
 
     private String renderTablinks() {
         StringBuilder builder = new StringBuilder();
-        builder.append("<div " + TABLINK_DIV_STYLE + ">");
         for (Tab tab : tabs) {
             builder.append("<button class=\"tablinks\" ")
                     .append("onclick=\"showTab(event, '").append(tab.getId()).append("')\" ")
@@ -62,8 +57,19 @@ public class TabbedPane extends AbstractComponent {
                     .append(tab.getTitle())
                     .append("</button>");
         }
-        builder.append(DIV_CLOSING);
         return builder.toString();
+    }
+
+    private String renderTabs() {
+        StringBuilder builder = new StringBuilder();
+        for (Tab tab : tabs) {
+            builder.append(tab.render());
+        }
+        return builder.toString();
+    }
+
+    private String renderJavaScript() {
+        return "<script>" + SHOW_TAB_JAVASCRIPT + "</script>";
     }
 
     List<Tab> getTabs() {

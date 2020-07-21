@@ -65,18 +65,22 @@ public abstract class Container extends AbstractComponent {
      */
     @Override
     public final String render() {
+        return renderOwnOpeningTag() +
+                TABLE_OPENING + renderRows() + TABLE_CLOSING +
+                renderOwnClosingTag();
+    }
+
+    private String renderRows() {
         StringBuilder builder = new StringBuilder();
-        builder.append(renderOwnOpeningTag()).append(TABLE_OPENING);
         for (List<Component> componentRow : components) {
             builder.append(ROW_OPENING)
-                    .append(renderRow(componentRow))
+                    .append(renderOneRow(componentRow))
                     .append(ROW_CLOSING);
         }
-        builder.append(TABLE_CLOSING).append(renderOwnClosingTag());
         return builder.toString();
     }
 
-    private String renderRow(List<Component> components) {
+    private String renderOneRow(List<Component> components) {
         StringBuilder builder = new StringBuilder();
         for (Component component : components) {
             builder.append(DATA_OPENING)
