@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents a component that is capable of storing (and displaying) other components.
+ * Components can be added after one another in a consecutive manner.
+ */
 public abstract class Container extends AbstractComponent {
 
     private static final String TABLE_OPENING = "<table>";
@@ -16,10 +20,26 @@ public abstract class Container extends AbstractComponent {
     protected List<List<Component>> components = new ArrayList<>();
     private Component lastAdded = null;
 
+    /**
+     * Returns the HTML opening tag of this container.
+     *
+     * @return the HTML opening tag of this container as a string
+     */
     protected abstract String renderOwnOpeningTag();
 
+    /**
+     * Returns the HTML closing tag of this container.
+     *
+     * @return the HTML closing tag of this container as a string
+     */
     protected abstract String renderOwnClosingTag();
 
+    /**
+     * Add the specified component into this container right next to the last added component.
+     * (i.e. into the same row)
+     *
+     * @param component the component to add
+     */
     public void addNextToLast(Component component) {
         if (components.isEmpty()) {
             addToNewRow(component);
@@ -28,10 +48,21 @@ public abstract class Container extends AbstractComponent {
         }
     }
 
+    /**
+     * Add the specified component into this container right below the last added component.
+     * (i.e. into the next row)
+     *
+     * @param component the component to add
+     */
     public void addUnderLast(Component component) {
         addToNewRow(component);
     }
 
+    /**
+     * Render this container and all of its contained components into HTML code.
+     *
+     * @return the HTML string representing this container and all of its components
+     */
     @Override
     public final String render() {
         StringBuilder builder = new StringBuilder();

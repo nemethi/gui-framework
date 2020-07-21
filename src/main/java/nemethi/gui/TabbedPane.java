@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * A component that contains {@code Tab}s which contain other components.
+ * Enables the user to switch between the tabs.
+ */
 public class TabbedPane extends AbstractComponent {
 
     private static final String TABLINK_BUTTON_STYLE = "style=\"background-color: inherit; border: none; float: left; outline: none; padding: 14px 16px;\"";
@@ -14,12 +18,23 @@ public class TabbedPane extends AbstractComponent {
 
     private final List<Tab> tabs = new ArrayList<>();
 
+    /**
+     * Adds a new {@code Tab} to this pane.
+     *
+     * @param tab the tab to be added
+     * @throws NullPointerException if the tab is {@code null}
+     */
     public void addTab(Tab tab) {
         Tab newTab = new Tab(tab);
         newTab.setId("Tabcontent" + (tabs.size() + 1));
         tabs.add(newTab);
     }
 
+    /**
+     * Returns the HTML representation of this pane and all of its tabs.
+     *
+     * @return the HTML string representing this pane
+     */
     @Override
     public String render() {
         StringBuilder builder = new StringBuilder();
@@ -55,11 +70,22 @@ public class TabbedPane extends AbstractComponent {
         return new ArrayList<>(tabs);
     }
 
+    /**
+     * A container that if it is paired with a {@code TabbedPane} enables
+     * the user to switch between displayed components.
+     */
     public static class Tab extends Container {
 
         private String title;
         private String id = "";
 
+        /**
+         * Creates a new {@code Tab} with a title displayed on the tab.
+         *
+         * @param title the title to be displayed on the tab
+         * @throws NullPointerException     if the title is null
+         * @throws IllegalArgumentException if the title is empty
+         */
         public Tab(String title) {
             this.title = Objects.requireNonNull(title, "title");
             if (title.isEmpty()) {
@@ -74,6 +100,9 @@ public class TabbedPane extends AbstractComponent {
             this.components = tab.components;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         protected String renderOwnOpeningTag() {
             return "<div class=\"tabcontent\" " +
@@ -81,15 +110,30 @@ public class TabbedPane extends AbstractComponent {
                     "style=\"display: none; padding: 6px 12px; border: 1px solid black; border-top: none;\">";
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         protected String renderOwnClosingTag() {
             return DIV_CLOSING;
         }
 
+        /**
+         * Returns the title of this tab.
+         *
+         * @return the title displayed on this tab
+         */
         public String getTitle() {
             return title;
         }
 
+        /**
+         * Sets the title that is displayed on this tab.
+         *
+         * @param title the title to be displayed on this tab
+         * @throws NullPointerException     if the title is {@code null}
+         * @throws IllegalArgumentException if the title is empty
+         */
         public void setTitle(String title) {
             this.title = Objects.requireNonNull(title, "title");
             if (title.isEmpty()) {
